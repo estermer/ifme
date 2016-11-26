@@ -86,18 +86,22 @@ Rails.application.configure do
   config.assets.compile = true
   config.assets.precompile += %w( ckeditor/* )
 
-  config.action_mailer.default_url_options = { host: 'http://if-me.org' }
+  config.action_mailer.default_url_options = { host: 'if-me.org' }
 
-  config.action_mailer.perform_deliveries = true
+  config.action_mailer.perform_deliveries = ENV["SEND_EMAIL"]
+  config.action_mailer.raise_delivery_errors = ENV["RAISE_DELIVERY_ERRORS"]
+  config.action_mailer.delivery_method = :smtp
 
   # If you want to actually test emails, you will have to configure SMTP settings here
   config.action_mailer.smtp_settings = {
-    :address        => '[insert address here]',
-    :port           => '[insert port here]',
-    :authentication => :plain,
-    :user_name      => '[insert email address here]',
-    :password       => '[insert password here]',
-    :domain         => '[insert domain here]',
-    :enable_starttls_auto => true
+    address: ENV["SMTP_ADDRESS"],
+    port: ENV["SMTP_PORT"],
+    authentication: "plain",
+    user_name: ENV["SMTP_USER_NAME"],
+    password: ENV["SMTP_PASSWORD"],
+    domain: ENV["SMTP_DOMAIN"],
+    enable_starttls_auto: true
   }
+
+  config.force_ssl = false
 end
