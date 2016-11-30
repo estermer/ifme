@@ -199,8 +199,6 @@ There are three config files: `config/env/test.env`, `config/env/development.env
 
 Copy the sample files to create your own configuration files:
 
-`cp config/database.example.yml config/database.yml`
-
 `cp config/env/test.example.env config/env/test.env`
 
 `cp config/env/development.example.env config/env/development.env`
@@ -219,6 +217,18 @@ If you want to test out scheduled emails, run the following commands: `bundle ex
 `bundle exec rake scheduler:send_refill_reminders`
 `bundle exec rake scheduler:send_perform_strategy_reminders`
 `bundle exec rake scheduler:send_meeting_reminders`
+
+#### Letter Opener
+
+The gem `letter_opener` enables test e-mails to be sent without actually sending an e-mail accidentaly to someone through SMTP. 
+
+You can disable this gem when you deploy the app by commenting it out.
+
+```
+# gem "letter_opener", :group => :development
+```
+
+You can read more about this gem [here](https://github.com/ryanb/letter_opener).
 
 ### Optional
 
